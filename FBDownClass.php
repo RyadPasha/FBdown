@@ -48,7 +48,7 @@ class FBDown {
         $title    = self::getTitle($data);
 
         if(strpos($data, 'captcha') !== false)
-          throw new Exception('Captcha required', 2);
+          throw new Exception('Your IP address is temporarily banned, please try again late or open Facebook.com and solve the captcha', 2);
 
         if (strtolower($title) === 'sorry, this content isn\'t available at the moment'
         ||  count(explode(' ', $title)) === 1)
