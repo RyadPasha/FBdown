@@ -3,11 +3,12 @@
   * @project: PHP Video Downloader Class
   *
   * @purpose: This class automatically generates download links for HD and SD quality.
-  * @version: 1.0
+  * @version: 1.5
   *
   *
   * @author: Mohamed Riyad
-  * @created on: 21 Sep, 2020
+  * @created on: 12 Feb, 2014
+  * @updated on: 21 Sep, 2020
   *
   * @url: http://ryadpasha.com
   * @email: m@ryad.com
@@ -73,12 +74,13 @@ class FBDown {
   }
 
   private static function setLink($url) {
-    $url = str_replace('m.facebook.com', 'www.facebook.com', $url);
-    if (!preg_match("~^(?:f|ht)tps?://~i", $url))
-      $url = "https://" . $url;
+    if(!empty($url)) {
+      $url = str_replace('m.facebook.com', 'www.facebook.com', $url);
+      if (!preg_match("~^(?:f|ht)tps?://~i", $url))
+        $url = "https://" . $url;
 
-    if(!empty($url))
       self::$link2DL = $url;
+    }
   }
 
   private static function generateId($url) {
@@ -98,7 +100,7 @@ class FBDown {
 
   private static function cleanStr($str, $keep_newlines = false) {
     if ($keep_newlines) {
-      $str = str_ireplace(array('<p>', '</p>'), array('', '<br>'), $str);  // Replace paragraphs with <br />
+      $str = str_ireplace(array('<p>', '</p>'), array('', '<br />'), $str);  // Replace paragraphs with <br />
       $str = str_ireplace(array('<br />', '<br>', '<br/>'), "\r\n", $str); // Replace <br /> with newline
     }
     return html_entity_decode(strip_tags($str), ENT_QUOTES, 'UTF-8');
@@ -129,7 +131,7 @@ class FBDown {
   }
 
   private static function getTitle($curl_content) {
-      $title = null;
+      $title = '';
       if (preg_match('/h2 class="uiHeaderTitle"?[^>]+>(.+?)<\/h2>/', $curl_content, $matches))
         $title = $matches[1];
       elseif (preg_match('/title id="pageTitle">(.+?)<\/title>/', $curl_content, $matches))
