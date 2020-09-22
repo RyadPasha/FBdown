@@ -1,8 +1,8 @@
 <?php
 /**
-  * @project: PHP Video Downloader Class
+  * @project: PHP Facebook Downloader Class
   *
-  * @purpose: This class automatically generates download links for HD and SD quality.
+  * @purpose: This Facebook downloader class automatically generates download links for HD and SD quality.
   * @version: 1.5
   *
   *
